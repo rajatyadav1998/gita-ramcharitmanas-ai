@@ -1,6 +1,0 @@
-[server]
-enableCORS = false
-enableXsrfProtection = false
-
-[deprecation]
-showPyplotGlobalUse = false
