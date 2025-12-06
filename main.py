@@ -7,7 +7,6 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough
@@ -20,7 +19,6 @@ loader = PyPDFDirectoryLoader("pdfs/")
 docs = loader.load()
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 splits = text_splitter.split_documents(docs)
-# embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
 embedding = GoogleGenerativeAIEmbeddings(
     model="models/embedding-001",
     task_type="retrieval_document"
@@ -54,5 +52,6 @@ def rag_chain(question, chat_history=""):
     })
     chain = setup | prompt | llm | StrOutputParser()
     return chain.invoke(question)
+
 
 print("AI तैयार है! जय श्री राम")
