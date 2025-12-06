@@ -1,4 +1,4 @@
-# agent_fallback.py ← पूरा कॉपी-पेस्ट कर दे
+# agent_fallback.py 
 
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_community.tools import DuckDuckGoSearchRun
@@ -25,7 +25,7 @@ def agent_answer(question, chat_history=[]):
     try:
         rag_result = rag_chain(question)
         if len(rag_result) < 60 or "नहीं मिला" in rag_result:
-            # chat_history को सही फॉर्मेट में भेजो
+            # chat_history
             formatted_history = []
             for m in chat_history:
                 if m["role"] == "user":
@@ -51,4 +51,5 @@ def agent_answer(question, chat_history=[]):
             "input": question,
             "chat_history": formatted_history
         })
+
         return response["output"]
